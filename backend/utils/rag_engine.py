@@ -82,7 +82,7 @@ def answer_query(question: str):
 You are an intelligent document assistant using retrieval-augmented generation (RAG).
 Use the provided document to answer the question , if the answer is not found try harder for a second time.
 If the answer cannot be found, respond with:
-"❌ The answer is not available in the provided documents."
+"❌ no answer."
 
 Question: {question}
 
