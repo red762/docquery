@@ -1,102 +1,169 @@
 import os
-import numpy as np
 import faiss
+import numpy as np
+from typing import List, Dict
 from openai import OpenAI
-#from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from sentence_transformers import CrossEncoder
 
-from utils.document_loader import extract_text_from_file
+# ========== CONFIG ==========
+EMBED_MODEL = "text-embedding-3-large"
+EMBED_DIM = 3072
+INDEX_PATH = "faiss_index.index"
 
-client = OpenAI(api_key="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")
-# In-memory FAISS index
-EMBEDDING_DIM = 1536
-index = faiss.IndexFlatL2(EMBEDDING_DIM)
-chunks = []  # store {text, doc_name, embedding}
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
+
+# In-memory document store
+documents: List[Dict] = []
+faiss_index = faiss.IndexFlatIP(EMBED_DIM)
+
+# ========== UTILS ==========
+
+def normalize(vectors: np.ndarray) -> np.ndarray:
+    """Normalize vectors for cosine similarity."""
+    return vectors / np.linalg.norm(vectors, axis=1, keepdims=True)
 
 
-def embed_text(text: str):
+def embed_text(text: str) -> np.ndarray:
+    """Create normalized embeddings using OpenAI API."""
+    resp = client.embeddings.create(model=EMBED_MODEL, input=text)
+    emb = np.array(resp.data[0].embedding, dtype=np.float32)
+    return emb / np.linalg.norm(emb)
+
+
+def load_index():
+    """Load FAISS index from disk if available."""
+    global faiss_index
+    if os.path.exists(INDEX_PATH):
+        faiss_index = faiss.read_index(INDEX_PATH)
+        print("✅ Loaded existing FAISS index.")
+    else:
+        print("🆕 No existing index found, starting fresh.")
+
+
+def save_index():
+    """Persist FAISS index to disk."""
+    faiss.write_index(faiss_index, INDEX_PATH)
+
+
+# ========== DOCUMENT PROCESSING ==========
+
+def process_documents(file_texts: Dict[str, str]):
     """
-    Convert text to an OpenAI embedding vector.
+    Takes a dict of {filename: text} and indexes them in FAISS.
+    Uses semantic-aware chunking and large embedding model.
     """
-    response = client.embeddings.create(
-        model="text-embedding-3-large",
-        input=text
-    )
-    return np.array(response.data[0].embedding, dtype=np.float32)
-
-
-def process_documents(filepaths: list):
-    """
-    Extracts, chunks, embeds, and stores document sections in FAISS.
-    """
-    global index, chunks
-    index.reset()
-    chunks = []
+    global documents, faiss_index
 
     splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1800,
-        chunk_overlap=200,
-        separators=["\n\n", "\n", ".", "!", "?", " ", ""],
+        chunk_size=1500,
+        chunk_overlap=300,
+        separators=["\n\n", "\n", ".", "!", "?", " ", ""]
     )
 
-    for path in filepaths:
-        filename = os.path.basename(path)
-        text = extract_text_from_file(path, filename)
-        if not text.strip():
-            print(f"⚠️ No readable text in {filename}")
-            continue
+    print("🔍 Processing documents...")
 
-        for chunk in splitter.split_text(text):
-            emb = embed_text(chunk)
-            index.add(np.array([emb]))
-            chunks.append({"text": chunk, "doc": filename, "embedding": emb})
+    all_chunks = []
+    embeddings = []
+
+    for filename, text in file_texts.items():
+        chunks = splitter.split_text(text)
+        for chunk in chunks:
+            entry = {
+                "text": chunk,
+                "doc": filename,
+            }
+            all_chunks.append(entry)
+
+            emb = embed_text(f"Document: {filename}\n\n{chunk}")
+            embeddings.append(emb)
+
+    embeddings = np.vstack(embeddings).astype("float32")
+    normalized = normalize(embeddings)
+
+    if faiss_index.ntotal == 0:
+        faiss_index = faiss.IndexFlatIP(EMBED_DIM)
+
+    faiss_index.add(normalized)
+    documents.extend(all_chunks)
+    save_index()
+
+    print(f"✅ Indexed {len(all_chunks)} chunks from {len(file_texts)} documents.")
 
 
-def retrieve_relevant_chunks(query: str, k: int = 5):
-    """
-    Retrieve top-k most semantically relevant chunks for the given query.
-    """
-    if len(chunks) == 0:
-        return []
+# ========== RETRIEVAL ==========
 
-    q_emb = embed_text(query)
-    D, I = index.search(np.array([q_emb]), k)
-    results = [chunks[i] for i in I[0] if i < len(chunks)]
-    return results
+def retrieve_relevant_chunks(query: str, k: int = 15) -> List[Dict]:
+    """Retrieve top-k most relevant chunks from FAISS."""
+    q_emb = embed_text(query).reshape(1, -1)
+    D, I = faiss_index.search(q_emb, k)
+    return [documents[i] for i in I[0] if i < len(documents)]
 
 
-def answer_query(question: str):
-    """
-    Retrieves relevant chunks and asks OpenAI for an answer.
-    """
-    relevant = retrieve_relevant_chunks(question)
+def rerank_results(query: str, candidates: List[Dict]) -> List[Dict]:
+    """Re-rank retrieved chunks using a cross-encoder model."""
+    pairs = [(query, c["text"]) for c in candidates]
+    scores = reranker.predict(pairs)
+    ranked = sorted(zip(scores, candidates), reverse=True, key=lambda x: x[0])
+    return [r[1] for r in ranked]
 
-    if not relevant:
-        return "❌ No relevant documents found. Please upload files first."
+
+# ========== ANSWER GENERATION ==========
+
+def answer_query(question: str) -> str:
+    """Retrieve best-matching context and generate final answer."""
+    if not documents:
+        return "⚠️ No documents have been uploaded or processed yet."
+
+    retrieved = retrieve_relevant_chunks(question)
+    ranked = rerank_results(question, retrieved)[:6]
 
     context = "\n\n".join(
-        [f"[{r['doc']}] {r['text']}" for r in relevant]
+        [f"[{r['doc']}] {r['text']}" for r in ranked]
     )
 
     prompt = f"""
-You are an intelligent document assistant using retrieval-augmented generation (RAG).
-Use the provided document to answer the question , if the answer is not found try harder for a second time.
-If the answer cannot be found, respond with:
-"❌ no answer."
+You are an intelligent document assistant (RAG system).
+Answer the user's question based ONLY on the information provided below.
 
-Question: {question}
+If the answer is not explicitly contained in the context,
+reply exactly with:
+"❌ The answer is not available in the provided documents."
 
 Context:
 {context}
-"""
 
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {"role": "system", "content": "You are a strict document QA assistant."},
-            {"role": "user", "content": prompt},
-        ],
-        temperature=0.2,
-    )
+Question:
+{question}
 
-    return response.choices[0].message.content.strip()
+Answer in the same language as the question.
+    """
+
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": "You are a factual assistant."},
+                {"role": "user", "content": prompt},
+            ],
+            temperature=0.2,
+        )
+        answer = response.choices[0].message.content.strip()
+        return answer
+
+    except Exception as e:
+        print("❌ Error generating answer:", str(e))
+        return "⚠️ An error occurred while generating the answer."
+
+
+# ========== RESET ==========
+
+def reset_engine():
+    """Reset FAISS index and in-memory docs."""
+    global documents, faiss_index
+    documents = []
+    faiss_index = faiss.IndexFlatIP(EMBED_DIM)
+    if os.path.exists(INDEX_PATH):
+        os.remove(INDEX_PATH)
+    print("🧹 Query engine reset.")
