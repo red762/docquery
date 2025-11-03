@@ -1,0 +1,30 @@
+# Core framework
+fastapi==0.115.2
+uvicorn==0.32.0
+
+# OpenAI API client
+openai>=1.42.0
+
+# Vector search engine
+faiss-cpu>=1.8.0
+
+# Text splitting (LangChain)
+langchain-text-splitters>=0.1.0
+
+# Document parsing
+PyMuPDF>=1.24.10        # PDF extraction
+python-docx>=1.1.0       # DOCX parsing
+openpyxl>=3.1.5          # XLSX parsing
+python-pptx>=0.6.23      # PPTX parsing
+
+# Utils
+numpy>=1.26.0
+pydantic>=2.8.2
+
+# (Optional) if you used OCR fallback previously
+pytesseract>=0.3.13
+pdf2image>=1.17.0
+Pillow>=10.4.0
+
+# Enable CORS for frontend
+python-multipart>=0.0.9
