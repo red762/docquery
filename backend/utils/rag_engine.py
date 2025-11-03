@@ -34,7 +34,7 @@ def process_documents(filepaths: list):
     chunks = []
 
     splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1200,
+        chunk_size=1800,
         chunk_overlap=200,
         separators=["\n\n", "\n", ".", "!", "?", " ", ""],
     )
