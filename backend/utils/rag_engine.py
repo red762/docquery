@@ -19,7 +19,7 @@ def embed_text(text: str):
     Convert text to an OpenAI embedding vector.
     """
     response = client.embeddings.create(
-        model="text-embedding-3-small",
+        model="text-embedding-3-large",
         input=text
     )
     return np.array(response.data[0].embedding, dtype=np.float32)
