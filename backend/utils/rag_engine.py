@@ -11,7 +11,7 @@ EMBED_MODEL = "text-embedding-3-large"
 EMBED_DIM = 3072
 INDEX_PATH = "faiss_index.index"
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI(api_key="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")
 reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
 
 # In-memory document store
