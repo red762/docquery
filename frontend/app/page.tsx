@@ -1,6 +1,11 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-
+import Latex from "react-latex-next"; // 🧮 Added for rendering math
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import rehypeRaw from "rehype-raw";
 type FileStatus = "uploaded" | "processing" | "ready";
 interface UploadedFile {
   file: File;
@@ -12,7 +17,6 @@ const BACKEND_URL =
   typeof window !== "undefined" && window.location.hostname === "localhost"
     ? "http://127.0.0.1:8000"
     : "https://docquery-oixr.onrender.com";
-    
 
 export default function Home() {
   const [files, setFiles] = useState<UploadedFile[]>([]);
@@ -42,12 +46,15 @@ export default function Home() {
 
     selectedFiles.forEach((file) => {
       const ext = file.name.split(".").pop()?.toLowerCase();
-      if (ext && ALLOWED_EXTENSIONS.includes(ext)) validFiles.push({ file, status: "uploaded" });
+      if (ext && ALLOWED_EXTENSIONS.includes(ext))
+        validFiles.push({ file, status: "uploaded" });
       else invalidFiles.push(file.name);
     });
 
     if (invalidFiles.length > 0) {
-      setError(`Unsupported file types: ${invalidFiles.join(", ")}. Allowed: ${ALLOWED_EXTENSIONS.join(", ")}`);
+      setError(
+        `Unsupported file types: ${invalidFiles.join(", ")}. Allowed: ${ALLOWED_EXTENSIONS.join(", ")}`
+      );
       return;
     }
 
@@ -133,14 +140,12 @@ export default function Home() {
           </div>
         )}
 
-        {/* Steps */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 justify-center mb-10 mt-10">
           <Step number="1" title="Upload" desc="Select TXT, DOCX, XLSX, PPTX, or PDF files." />
           <Step number="2" title="Process" desc="AI reads, splits, and indexes your documents." />
           <Step number="3" title="Ask" desc="Query across all documents with natural language." />
         </div>
 
-        {/* Uploaded Files */}
         {files.length > 0 && (
           <div className="w-full max-w-md mx-auto text-left">
             <h3 className="text-sm font-semibold text-gray-700 mb-3 text-center">Uploaded Documents</h3>
@@ -161,7 +166,11 @@ export default function Home() {
                           : "bg-green-100 text-green-700"
                       }`}
                     >
-                      {f.status === "uploaded" ? "Uploaded" : f.status === "processing" ? "Processing…" : "Ready"}
+                      {f.status === "uploaded"
+                        ? "Uploaded"
+                        : f.status === "processing"
+                        ? "Processing…"
+                        : "Ready"}
                     </span>
                   </div>
                   <button
@@ -190,7 +199,6 @@ export default function Home() {
           </div>
         )}
 
-        {/* Query Engine */}
         {allFilesReady && (
           <div className="mt-10 w-full max-w-xl mx-auto">
             <h3 className="text-lg font-semibold text-gray-800 mb-4 text-center">
@@ -204,24 +212,46 @@ export default function Home() {
                 </p>
               )}
 
-              {responses.map((res, i) => (
-                <div
-                  key={i}
-                  className="bg-white border border-gray-200 rounded-lg p-3 shadow-sm transition hover:shadow-md"
-                >
-                  <p className="text-sm font-semibold text-gray-900 mb-2 whitespace-pre-line">
-                    Q{i + 1}: {res.split("||")[0]}
-                  </p>
-                  <div className="flex items-start gap-2">
-                    <span className="text-xl">🤖</span>
-                    <p className="text-sm text-gray-700 leading-relaxed">{res.split("||")[1]}</p>
+              {responses.map((res, i) => {
+                const [question, answer] = res.split("||");
+                return (
+                  <div
+                    key={i}
+                    className="bg-white border border-gray-200 rounded-lg p-3 shadow-sm transition hover:shadow-md"
+                  >
+                    <p className="text-sm font-semibold text-gray-900 mb-2 whitespace-pre-line">
+                      Q{i + 1}: {question}
+                    </p>
+                    <div className="flex items-start gap-2">
+                      <span className="text-xl">🤖</span>
+                       {/* ✅ Render with LaTeX support */}
+
+                   
+<div className="text-sm text-gray-700 leading-relaxed overflow-x-auto prose max-w-none">
+  <ReactMarkdown
+    remarkPlugins={[remarkGfm, remarkMath]}
+    rehypePlugins={[rehypeKatex, rehypeRaw]}
+  >
+    {
+      // ✅ Nettoyage du texte pour que KaTeX reconnaisse bien les équations
+      answer
+        .replace(/\\\(/g, "$")    // transforme \( ... \) → $ ... $
+        .replace(/\\\)/g, "$")
+        .replace(/\\\[/g, "$$")   // transforme \[ ... \] → $$ ... $$
+        .replace(/\\\]/g, "$$")
+    }
+  </ReactMarkdown>
+</div>
+
+
+                   {/*end latex answer*/}
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
               <div ref={chatEndRef} />
             </div>
 
-            {/* Input */}
             <div className="flex items-center border border-gray-300 rounded-xl shadow-sm p-2 mt-4 bg-white">
               <input
                 type="text"
