@@ -6,8 +6,7 @@ uvicorn==0.30.6
 python-multipart==0.0.9
 
 # ---- Document Processing ----
-PyMuPDF==1.24.10           # fitz (PDF parsing)
-PyPDF2==3.0.1
+
 
 openpyxl==3.1.5
 pillow==10.3.0
@@ -29,3 +28,5 @@ tiktoken==0.7.0
 spacy==3.7.4
 beautifulsoup4==4.12.3
 python-dotenv==1.0.1
+PyMuPDF==1.24.10           # fitz (PDF parsing)
+PyPDF2==3.0.1
