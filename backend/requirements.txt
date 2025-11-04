@@ -19,6 +19,5 @@ openai==1.42.0
 tiktoken==0.7.0
 
 # ---- Utilities ----
-spacy==3.7.4
-beautifulsoup4==4.12.3
+
 python-dotenv==1.0.1
