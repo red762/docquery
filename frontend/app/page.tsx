@@ -8,7 +8,10 @@ interface UploadedFile {
 }
 
 const ALLOWED_EXTENSIONS = ["txt", "docx", "xlsx", "pptx", "pdf"];
-const BACKEND_URL = "http://127.0.0.1:8000";
+const BACKEND_URL =
+  typeof window !== "undefined" && window.location.hostname === "localhost"
+    ? "http://127.0.0.1:8000"
+    : "https://docquery-oixr.onrender.com";
 
 export default function Home() {
   const [files, setFiles] = useState<UploadedFile[]>([]);
