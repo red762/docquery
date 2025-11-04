@@ -30,13 +30,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # ---------------------------
 # Install Python dependencies
 # ---------------------------
-COPY backend/requirements.txt .
+COPY requirements.txt .
+
 RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
 
 # ---------------------------
 # Copy project files
 # ---------------------------
-COPY backend/ .
+
 
 # ---------------------------
 # Expose API port
