@@ -1,5 +1,4 @@
 import requests
-from pathlib import Path
 from docx import Document
 from pptx import Presentation
 import openpyxl
