@@ -1,0 +1,11 @@
+tesseract-ocr
+tesseract-ocr-eng
+tesseract-ocr-fra
+tesseract-ocr-ara
+tesseract-ocr-deu
+tesseract-ocr-chi-sim
+tesseract-ocr-rus
+libtesseract-dev
+poppler-utils
+libgl1
+libglib2.0-0
