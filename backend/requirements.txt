@@ -8,3 +8,4 @@ openpyxl
 python-pptx
 numpy
 python-multipart
+requests
