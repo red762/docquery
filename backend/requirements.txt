@@ -15,8 +15,7 @@ langchain==0.3.3
 langchain-core==0.3.13
 langchain-community==0.3.2
 langchain-openai==0.2.2
-openai==1.42.0
-
+openai==1.30.5
 # ---- Utilities ----
 
 python-dotenv==1.0.1
