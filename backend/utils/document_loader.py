@@ -6,6 +6,7 @@ import pytesseract
 import io
 import numpy as np
 import cv2
+from docx import Document
 
 
 # Optional: specify Tesseract path (for Windows)
@@ -63,7 +64,6 @@ def extract_from_pdf(path: str) -> str:
 
 # ---------------- Word Extractor ---------------- #
 def extract_from_docx(path: str) -> str:
-    from docx import Document
     doc = Document(path)
     return "\n".join([para.text for para in doc.paragraphs])
 
