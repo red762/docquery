@@ -25,7 +25,6 @@ pydantic>=2.8.2
 pytesseract>=0.3.13
 pdf2image>=1.17.0
 Pillow>=10.4.0
-sentence-transformers
 
 # Enable CORS for frontend
 python-multipart>=0.0.9
