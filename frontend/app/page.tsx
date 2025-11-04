@@ -112,7 +112,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center bg-gradient-to-b from-white to-gray-50 text-gray-800 px-4 pt-8 pb-32 relative">
+<main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-white to-gray-50 text-gray-800 px-4 pt-8 pb-32 relative">
       <section className="text-center max-w-3xl w-full">
         <h1 className="text-4xl font-extrabold text-gray-900 mb-2 tracking-tight">DocQuery</h1>
         <p className="text-gray-500 mb-8 text-sm sm:text-base">
