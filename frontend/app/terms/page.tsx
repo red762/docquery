@@ -1,57 +1,204 @@
-export const metadata = {
-  title: "Terms of Service – DocQuery",
-  description: "Read the terms and conditions of using the DocQuery platform.",
-};
+"use client";
 
-export default function TermsPage() {
+export default function TermsOfService() {
   return (
-    <main className="max-w-3xl mx-auto px-6 py-12 text-gray-800 leading-relaxed">
-      <h1 className="text-3xl font-bold mb-6 text-gray-900">Terms of Service</h1>
-      <p className="mb-4">
-        By accessing or using <strong>DocQuery</strong>, you agree to the following terms and
-        conditions. Please read them carefully before using the service.
-      </p>
+    <main className="min-h-screen bg-white text-gray-800 flex flex-col items-center px-6 py-16 overflow-y-auto">
+      <div className="max-w-4xl w-full">
+        <h1 className="text-4xl font-extrabold text-center mb-8">
+          Terms of Service
+        </h1>
+        <p className="text-gray-600 text-center mb-12 text-sm">
+          Last updated: November 2025
+        </p>
 
-      <h2 className="text-2xl font-semibold mt-8 mb-3">1. Use of the Service</h2>
-      <p className="mb-4">
-        DocQuery provides an AI-driven tool to analyze, summarize, and extract insights from
-        uploaded documents. You agree to use the platform only for lawful purposes.
-      </p>
+        <section className="space-y-10 leading-relaxed text-justify text-[15px] sm:text-base">
+          <p>
+            Welcome to <strong>DocQuery</strong>. These Terms of Service
+            (“Terms”) govern your use of our document-processing and AI query
+            services, websites, and related products (collectively referred to
+            as the “Service”). By accessing or using our Service, you agree to
+            be bound by these Terms. Please read them carefully.
+          </p>
 
-      <h2 className="text-2xl font-semibold mt-8 mb-3">2. Intellectual Property</h2>
-      <p className="mb-4">
-        All platform content, branding, and interface design are owned by DocQuery. You retain
-        ownership of any documents you upload.
-      </p>
+          <h2 className="text-2xl font-semibold mt-10 mb-3">1. Acceptance of Terms</h2>
+          <p>
+            By using DocQuery, you confirm that you are at least 18 years old or
+            that you are of legal age in your jurisdiction to enter into a
+            binding contract. If you are using the Service on behalf of an
+            organization, you agree to these Terms on behalf of that
+            organization.
+          </p>
 
-      <h2 className="text-2xl font-semibold mt-8 mb-3">3. User Responsibilities</h2>
-      <ul className="list-disc ml-6 mb-4">
-        <li>Do not upload sensitive or illegal materials.</li>
-        <li>Do not use the service to violate copyright or intellectual property rights.</li>
-        <li>Do not attempt to reverse-engineer or misuse the platform.</li>
-      </ul>
+          <h2 className="text-2xl font-semibold mt-10 mb-3">
+            2. Description of the Service
+          </h2>
+          <p>
+            DocQuery provides a platform that allows users to upload digital
+            documents (including PDFs, Word, Excel, PowerPoint, and text files)
+            and interact with them using AI-powered natural language processing.
+            The Service may also rely on external APIs, including optical
+            character recognition (OCR) and large language models, to generate
+            responses and summaries.
+          </p>
+          <p>
+            We reserve the right to modify or discontinue the Service, or any
+            part of it, temporarily or permanently, with or without notice.
+          </p>
 
-      <h2 className="text-2xl font-semibold mt-8 mb-3">4. Disclaimer of Warranty</h2>
-      <p className="mb-4">
-        DocQuery is provided “as is” without warranties of any kind. We strive for accuracy but do
-        not guarantee the completeness or reliability of generated outputs.
-      </p>
+          <h2 className="text-2xl font-semibold mt-10 mb-3">3. Account and Usage</h2>
+          <p>
+            Certain features of the Service may require user identification or
+            session-based storage. You agree to maintain the confidentiality of
+            your session data and are responsible for all activities that occur
+            under it.
+          </p>
+          <p>
+            You must not use the Service in any manner that violates applicable
+            laws or regulations, including data privacy and intellectual
+            property laws.
+          </p>
 
-      <h2 className="text-2xl font-semibold mt-8 mb-3">5. Limitation of Liability</h2>
-      <p className="mb-4">
-        DocQuery shall not be liable for any indirect, incidental, or consequential damages
-        resulting from your use of the platform.
-      </p>
+          <h2 className="text-2xl font-semibold mt-10 mb-3">
+            4. Document Uploads and Data Privacy
+          </h2>
+          <p>
+            When you upload files to DocQuery, you retain full ownership of your
+            content. DocQuery does not claim intellectual property rights over
+            your documents or generated responses. Uploaded files are processed
+            securely in memory or through isolated sessions and are not shared
+            with third parties.
+          </p>
+          <p>
+            You acknowledge, however, that the use of AI-based tools involves
+            cloud-based processing and may rely on third-party providers such as
+            OpenAI or OCR APIs. While we take reasonable steps to ensure privacy
+            and security, you understand that complete confidentiality cannot be
+            guaranteed.
+          </p>
 
-      <h2 className="text-2xl font-semibold mt-8 mb-3">6. Updates to These Terms</h2>
-      <p className="mb-4">
-        We may revise these terms periodically. Continued use of DocQuery after updates implies
-        acceptance of the revised terms.
-      </p>
+          <h2 className="text-2xl font-semibold mt-10 mb-3">5. Acceptable Use Policy</h2>
+          <ul className="list-disc list-inside space-y-2">
+            <li>Do not upload illegal, harmful, or copyrighted content.</li>
+            <li>
+              Do not use the Service for automated data scraping or reverse
+              engineering.
+            </li>
+            <li>
+              Do not attempt to interfere with or disrupt the platform’s
+              integrity, performance, or security.
+            </li>
+            <li>
+              You are solely responsible for ensuring that the content you
+              process through the Service complies with all applicable laws.
+            </li>
+          </ul>
 
-      <p className="text-sm text-gray-500 mt-8">
-        Last updated: {new Date().getFullYear()}.
-      </p>
+          <h2 className="text-2xl font-semibold mt-10 mb-3">6. Intellectual Property</h2>
+          <p>
+            The DocQuery platform, including its design, code, algorithms,
+            interfaces, and brand assets, is the exclusive property of the
+            DocQuery development team and its licensors. Unauthorized use,
+            reproduction, or distribution of the Service’s components is
+            strictly prohibited.
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-10 mb-3">7. AI-Generated Content</h2>
+          <p>
+            The responses generated by our AI models are provided for
+            informational purposes only. While we strive for accuracy, AI output
+            may contain errors, biases, or hallucinated information. You should
+            independently verify critical information before relying on it.
+          </p>
+          <p>
+            DocQuery is not liable for any decisions made or actions taken based
+            on AI-generated responses.
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-10 mb-3">8. Payment and Subscriptions</h2>
+          <p>
+            Some parts of the Service may require a paid subscription. If
+            applicable, pricing, billing cycles, and refund policies will be
+            detailed during checkout. All payments are processed through secure
+            third-party providers.
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-10 mb-3">
+            9. Termination of Access
+          </h2>
+          <p>
+            We may suspend or terminate your access to the Service at any time
+            if we believe you have violated these Terms, caused harm to the
+            Service, or used it in a manner inconsistent with its intended
+            purpose. Upon termination, your session data may be deleted.
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-10 mb-3">
+            10. Limitation of Liability
+          </h2>
+          <p>
+            To the maximum extent permitted by law, DocQuery, its developers,
+            and affiliates shall not be liable for any indirect, incidental,
+            special, consequential, or punitive damages arising from or related
+            to your use of the Service, even if we have been advised of the
+            possibility of such damages.
+          </p>
+          <p>
+            Our total liability for any claim arising out of or relating to the
+            Service shall not exceed the amount paid by you (if any) for access
+            to the Service during the 12 months preceding the claim.
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-10 mb-3">
+            11. Indemnification
+          </h2>
+          <p>
+            You agree to indemnify and hold harmless DocQuery, its developers,
+            partners, and affiliates from any claims, losses, damages,
+            liabilities, and expenses (including legal fees) arising out of your
+            use of the Service or violation of these Terms.
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-10 mb-3">12. Third-Party Links</h2>
+          <p>
+            Our Service may contain links to third-party websites or services.
+            We do not control or endorse those websites and are not responsible
+            for their content, policies, or practices. Use them at your own
+            risk.
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-10 mb-3">13. Modifications</h2>
+          <p>
+            We may revise these Terms from time to time to reflect updates in
+            our policies, technologies, or legal requirements. The revised Terms
+            will take effect immediately upon being posted on our website. Your
+            continued use of the Service constitutes acceptance of those
+            changes.
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-10 mb-3">14. Governing Law</h2>
+          <p>
+            These Terms shall be governed by and interpreted under the laws of
+            your country or region of residence, without regard to its conflict
+            of law principles. Any disputes arising from these Terms shall be
+            resolved in the courts of the jurisdiction where the Service is
+            operated.
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-10 mb-3">15. Contact Information</h2>
+          <p>
+            If you have any questions, concerns, or complaints about these
+            Terms, please contact our team at:
+          </p>
+          <p className="font-medium text-gray-700 mt-3">
+            📧 support@docquery.ai  
+            <br />🌍 www.docquery.ai  
+          </p>
+        </section>
+
+        <footer className="mt-20 border-t border-gray-200 pt-6 text-sm text-center text-gray-500">
+          © {new Date().getFullYear()} DocQuery. All rights reserved.
+        </footer>
+      </div>
     </main>
   );
 }

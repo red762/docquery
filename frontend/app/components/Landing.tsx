@@ -221,9 +221,9 @@ export default function Landing({
       {/* 🦶 Footer */}
       <footer className="w-full border-t border-gray-200 pt-10 pb-6 text-center text-sm text-gray-500">
         <div className="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-6 mb-4">
-          <a href="#" className="hover:text-blue-600 transition-colors">About</a>
-          <a href="#" className="hover:text-blue-600 transition-colors">Privacy Policy</a>
-          <a href="#" className="hover:text-blue-600 transition-colors">Terms of Service</a>
+          <a href="/about" className="hover:text-blue-600 transition-colors">About</a>
+          <a href="/privacy-policy" className="hover:text-blue-600 transition-colors">Privacy Policy</a>
+          <a href="/terms" className="hover:text-blue-600 transition-colors">Terms of Service</a>
         </div>
         <p>
           © {new Date().getFullYear()} <span className="font-semibold text-gray-800">DocQuery</span>. All rights reserved.

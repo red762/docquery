@@ -62,7 +62,7 @@ export default function PrivacyPolicyPage() {
           href="mailto:privacy@docquery.online"
           className="text-blue-600 hover:underline"
         >
-          privacy@docquery.online
+          support@docquery.online
         </a>.
       </p>
 
