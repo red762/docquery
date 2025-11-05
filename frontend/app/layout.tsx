@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
+import SmartlinkAuto from "./components/SmartlinkAuto";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,11 +39,14 @@ export default function RootLayout({
             gtag('js', new Date());
             gtag('config', 'G-W94Q4T3H8D');
           `}
+          
         </Script>
+        <Script type='text/javascript' src='//pl27995345.effectivegatecpm.com/90/1c/51/901c51efbba254c878761befbde57eeb.js'/>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 text-gray-800`}
       >
+
         {children}
       </body>
     </html>

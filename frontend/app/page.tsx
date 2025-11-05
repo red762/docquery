@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import Navbar from "./components/navbar";
 import Sidebar from "./components/sidebar";
 import Landing from "./components/Landing";
+import SmartlinkAuto from "./components/SmartlinkAuto";
+
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
@@ -20,6 +22,8 @@ const ALLOWED_EXTENSIONS = ["txt", "docx", "xlsx", "pptx", "pdf"];
 const BACKEND_URL = "https://docquery-oixr.onrender.com";
 
 export default function Page() {
+                <SmartlinkAuto />
+
   const [files, setFiles] = useState<UploadedFile[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState("");
