@@ -15,33 +15,33 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "DocQuery",
-  description: "get answers to your questions from the provided documents,fast and free",
+  description: "Get answers to your questions from uploaded documents — fast and free",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-  <head>
-    {/* ✅ Google Analytics */}
-    <Script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-W94Q4T3H8D"
-    />
-    <Script id="google-analytics">
-      {`
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-W94Q4T3H8D');
-      `}
-    </Script>
-  </head>
+      <head>
+        {/* ✅ Google Analytics */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-W94Q4T3H8D"
+        />
+        <Script id="google-analytics">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-W94Q4T3H8D');
+          `}
+        </Script>
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 text-gray-800`}
       >
         {children}
       </body>

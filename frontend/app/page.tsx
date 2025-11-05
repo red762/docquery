@@ -1,11 +1,15 @@
 "use client";
+
 import { useState, useEffect, useRef } from "react";
-import Latex from "react-latex-next"; // 🧮 Added for rendering math
+import Navbar from "./components/navbar";
+import Sidebar from "./components/sidebar";
+import { Menu } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
+
 type FileStatus = "uploaded" | "processing" | "ready";
 interface UploadedFile {
   file: File;
@@ -13,30 +17,23 @@ interface UploadedFile {
 }
 
 const ALLOWED_EXTENSIONS = ["txt", "docx", "xlsx", "pptx", "pdf"];
-const BACKEND_URL =
-  typeof window !== "undefined" && window.location.hostname === "localhost"
-    ? "http://127.0.0.1:8000"
-    : "https://docquery-oixr.onrender.com";
+const BACKEND_URL = "https://docquery-oixr.onrender.com";
 
-export default function Home() {
+export default function Page() {
   const [files, setFiles] = useState<UploadedFile[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [responses, setResponses] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [allFilesReady, setAllFilesReady] = useState(false);
-
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [showUploadUI, setShowUploadUI] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const chatEndRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [responses]);
-
-  const resetQueryEngine = () => {
-    setResponses([]);
-    setQuery("");
-    setAllFilesReady(false);
-    setError(null);
-  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
@@ -55,22 +52,30 @@ export default function Home() {
       setError(
         `Unsupported file types: ${invalidFiles.join(", ")}. Allowed: ${ALLOWED_EXTENSIONS.join(", ")}`
       );
+      setTimeout(() => setError(null), 2000);
       return;
     }
 
     setFiles((prev) => [...prev, ...validFiles]);
-    resetQueryEngine();
+    setResponses([]);
+    setAllFilesReady(false);
     e.target.value = "";
   };
 
   const handleRemoveFile = (index: number) => {
-    setFiles((prev) => prev.filter((_, i) => i !== index));
-    resetQueryEngine();
+    const updated = files.filter((_, i) => i !== index);
+    setFiles(updated);
+    if (updated.length === 0) {
+      setAllFilesReady(false);
+      setShowUploadUI(true);
+    }
   };
 
   const handleProcessFiles = async () => {
     if (files.length === 0) return;
-    setFiles((prev) => prev.map((f) => ({ ...f, status: "processing" })));
+    setError(null);
+    setIsProcessing(true);
+    setShowUploadUI(false);
     setAllFilesReady(false);
 
     try {
@@ -78,13 +83,16 @@ export default function Home() {
       files.forEach((f) => formData.append("files", f.file));
       const res = await fetch(`${BACKEND_URL}/upload`, { method: "POST", body: formData });
       if (!res.ok) throw new Error("Upload failed");
-
       setFiles((prev) => prev.map((f) => ({ ...f, status: "ready" })));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       setAllFilesReady(true);
     } catch (err) {
       console.error(err);
       setError("Error uploading files. Ensure backend is running.");
-      setFiles((prev) => prev.map((f) => ({ ...f, status: "uploaded" })));
+      setTimeout(() => setError(null), 1500);
+      setShowUploadUI(true);
+    } finally {
+      setIsProcessing(false);
     }
   };
 
@@ -96,9 +104,7 @@ export default function Home() {
       formData.append("question", query);
       const res = await fetch(`${BACKEND_URL}/query`, { method: "POST", body: formData });
       const data = await res.json();
-      if (data.error)
-        setResponses((prev) => [...prev, `${query}||⚠️ ${data.error}`]);
-      else setResponses((prev) => [...prev, `${query}||${data.answer}`]);
+      setResponses((prev) => [...prev, `${query}||${data.answer ?? "⚠️ Error"}`]);
     } catch {
       setResponses((prev) => [...prev, `${query}||⚠️ Backend not reachable.`]);
     } finally {
@@ -107,144 +113,158 @@ export default function Home() {
     }
   };
 
-  const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") handleAskQuery();
+  const handleAskQueryPrompt = async (customPrompt: string) => {
+    setLoading(true);
+    try {
+      const formData = new FormData();
+      formData.append("question", customPrompt);
+      const res = await fetch(`${BACKEND_URL}/query`, { method: "POST", body: formData });
+      const data = await res.json();
+      setResponses((prev) => [...prev, `${customPrompt}||${data.answer ?? "⚠️ Error"}`]);
+    } catch {
+      setResponses((prev) => [...prev, `${customPrompt}||⚠️ Backend not reachable.`]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-<main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-white to-gray-50 text-gray-800 px-4 pt-8 pb-32 relative">
-      <section className="text-center max-w-3xl w-full">
-        <h1 className="text-4xl font-extrabold text-gray-900 mb-2 tracking-tight">DocQuery</h1>
-        <p className="text-gray-500 mb-8 text-sm sm:text-base">
-          Upload multiple documents and ask questions. The AI will answer only based on your uploaded files.
-        </p>
+    <main className="flex flex-col h-screen bg-gray-50 text-gray-900 overflow-hidden">
+      {/* ✅ Navbar on top (full width) */}
+      <Navbar
+        files={files}
+        isProcessing={isProcessing}
+        allFilesReady={allFilesReady}
+        error={error}
+        onFileChange={handleFileChange}
+        onRemoveFile={handleRemoveFile}
+        onProcessFiles={handleProcessFiles}
+      />
 
-        <label
-          htmlFor="file-upload"
-          className="cursor-pointer inline-flex items-center justify-center px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition shadow-sm hover:shadow-md"
-        >
-          📄 Upload Documents
-        </label>
-        <input
-          id="file-upload"
-          type="file"
-          multiple
-          accept=".txt,.docx,.xlsx,.pptx,.pdf"
-          className="hidden"
-          onChange={handleFileChange}
-        />
+      {/* ✅ Main content area: Sidebar + Chat */}
+      <div className="flex flex-1 min-h-0">
+        {/* Sidebar (desktop) */}
+        <aside className="hidden md:flex w-64 flex-shrink-0 border-r border-gray-200 bg-white flex-col">
+          <Sidebar
+            files={files}
+            onQuickAction={(prompt) => {
+              if (!allFilesReady) return;
+              setQuery(prompt);
+              handleAskQueryPrompt(prompt);
+            }}
+            onClearContext={() => {
+              setResponses([]);
+              setQuery("");
+              setError(null);
+            }}
+          />
+        </aside>
 
-        {error && (
-          <div className="text-red-600 text-sm bg-red-50 border border-red-200 rounded-lg px-4 py-2 mt-4 max-w-md mx-auto animate-fade-in">
-            {error}
+        {/* Sidebar (mobile overlay) */}
+        {sidebarOpen && (
+          <div
+            className="fixed inset-0 z-50 flex"
+            onClick={() => setSidebarOpen(false)}
+          >
+            <div className="fixed inset-0 bg-black/30 backdrop-blur-sm" aria-hidden="true"></div>
+            <div
+              className="relative z-10 w-64 bg-white border-r border-gray-200 shadow-lg flex flex-col animate-slide-in"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Sidebar
+                files={files}
+                onQuickAction={(prompt) => {
+                  if (!allFilesReady) return;
+                  setQuery(prompt);
+                  handleAskQueryPrompt(prompt);
+                  setSidebarOpen(false);
+                }}
+                onClearContext={() => {
+                  setResponses([]);
+                  setQuery("");
+                  setError(null);
+                }}
+              />
+            </div>
           </div>
         )}
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 justify-center mb-10 mt-10">
-          <Step number="1" title="Upload" desc="Select TXT, DOCX, XLSX, PPTX, or PDF files." />
-          <Step number="2" title="Process" desc="AI reads, splits, and indexes your documents." />
-          <Step number="3" title="Ask" desc="Query across all documents with natural language." />
-        </div>
-
-        {files.length > 0 && (
-          <div className="w-full max-w-md mx-auto text-left">
-            <h3 className="text-sm font-semibold text-gray-700 mb-3 text-center">Uploaded Documents</h3>
-            <ul className="space-y-2 mb-6">
-              {files.map((f, i) => (
-                <li
-                  key={i}
-                  className="flex items-center justify-between bg-white border border-gray-200 rounded-lg px-4 py-2 text-sm shadow-sm"
-                >
-                  <div className="flex items-center gap-2 overflow-hidden">
-                    <span className="truncate text-gray-700">{f.file.name}</span>
-                    <span
-                      className={`px-2 py-0.5 rounded-full text-xs font-medium ${
-                        f.status === "uploaded"
-                          ? "bg-gray-200 text-gray-700"
-                          : f.status === "processing"
-                          ? "bg-yellow-100 text-yellow-700"
-                          : "bg-green-100 text-green-700"
-                      }`}
-                    >
-                      {f.status === "uploaded"
-                        ? "Uploaded"
-                        : f.status === "processing"
-                        ? "Processing…"
-                        : "Ready"}
-                    </span>
-                  </div>
-                  <button
-                    onClick={() => handleRemoveFile(i)}
-                    className="ml-3 text-gray-400 hover:text-red-500 transition"
-                    title="Remove document"
-                  >
-                    ✖
-                  </button>
-                </li>
-              ))}
-            </ul>
-
-            {!allFilesReady ? (
-              <div className="text-center">
+        {/* Chat Area */}
+        <section className="relative flex-1 flex flex-col min-h-0 bg-gray-50 p-4 sm:p-6 md:p-8">
+          {/* Upload Section */}
+          <div
+            className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-700 ease-in-out ${
+              showUploadUI && !isProcessing && !allFilesReady
+                ? "opacity-100 scale-100 z-10"
+                : "opacity-0 scale-95 pointer-events-none z-0"
+            }`}
+          >
+            <div className="border-2 border-dashed border-gray-300 rounded-2xl p-8 sm:p-10 bg-white shadow-sm w-full max-w-md text-center">
+              <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-2">
+                Upload your documents 📄
+              </h2>
+              <p className="text-sm text-gray-500 mb-6">
+                Supported formats: txt, docx, xlsx, pptx, pdf
+              </p>
+              <label
+                htmlFor="file-upload"
+                className="cursor-pointer inline-block w-full px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition shadow-sm"
+              >
+                Select Files
+              </label>
+              <input
+                id="file-upload"
+                type="file"
+                multiple
+                accept=".txt,.docx,.xlsx,.pptx,.pdf"
+                className="hidden"
+                onChange={handleFileChange}
+              />
+              {files.length > 0 && (
                 <button
                   onClick={handleProcessFiles}
-                  className="px-8 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition shadow hover:shadow-lg"
+                  disabled={isProcessing}
+                  className="mt-4 w-full px-5 py-2 rounded-lg font-medium shadow-sm bg-green-600 hover:bg-green-700 text-white transition"
                 >
-                  Start Processing
+                  Start
                 </button>
-              </div>
-            ) : (
-              <div className="text-center text-green-600 font-medium">✅ All documents processed!</div>
-            )}
-          </div>
-        )}
-
-        {allFilesReady && (
-          <div className="mt-10 w-full max-w-xl mx-auto">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4 text-center">
-              Query Your Documents
-            </h3>
-
-            <div className="space-y-4 bg-gray-50 border border-gray-200 rounded-lg p-4 max-h-[400px] overflow-y-auto shadow-sm">
-              {responses.length === 0 && (
-                <p className="text-gray-400 text-center italic">
-                  No questions yet — start by asking about your documents 📘
-                </p>
               )}
+            </div>
+          </div>
 
+          {/* Loader */}
+          {isProcessing && !allFilesReady && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/80 backdrop-blur-sm z-20">
+              <div className="w-10 sm:w-12 h-10 sm:h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+              <p className="text-gray-700 font-medium text-sm sm:text-base">
+                Processing your documents...
+              </p>
+            </div>
+          )}
+
+          {/* Scrollable Chat Section */}
+          <div
+            className={`flex flex-col flex-1 min-h-0 transition-all duration-700 ease-in-out ${
+              allFilesReady && !isProcessing
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-5 pointer-events-none"
+            }`}
+          >
+            <div className="flex-1 overflow-y-auto space-y-4 pr-2 scroll-smooth scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
               {responses.map((res, i) => {
                 const [question, answer] = res.split("||");
                 return (
-                  <div
-                    key={i}
-                    className="bg-white border border-gray-200 rounded-lg p-3 shadow-sm transition hover:shadow-md"
-                  >
-                    <p className="text-sm font-semibold text-gray-900 mb-2 whitespace-pre-line">
+                  <div key={i} className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+                    <p className="text-sm sm:text-base font-semibold text-black mb-2">
                       Q{i + 1}: {question}
                     </p>
-                    <div className="flex items-start gap-2">
-                      <span className="text-xl">🤖</span>
-                       {/* ✅ Render with LaTeX support */}
-
-                   
-<div className="text-sm text-gray-700 leading-relaxed overflow-x-auto prose max-w-none">
-  <ReactMarkdown
-    remarkPlugins={[remarkGfm, remarkMath]}
-    rehypePlugins={[rehypeKatex, rehypeRaw]}
-  >
-    {
-      // ✅ Nettoyage du texte pour que KaTeX reconnaisse bien les équations
-      answer
-        .replace(/\\\(/g, "$")    // transforme \( ... \) → $ ... $
-        .replace(/\\\)/g, "$")
-        .replace(/\\\[/g, "$$")   // transforme \[ ... \] → $$ ... $$
-        .replace(/\\\]/g, "$$")
-    }
-  </ReactMarkdown>
-</div>
-
-
-                   {/*end latex answer*/}
+                    <div className="text-sm sm:text-base text-black leading-relaxed prose max-w-none">
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm, remarkMath]}
+                        rehypePlugins={[rehypeKatex, rehypeRaw]}
+                      >
+                        {answer}
+                      </ReactMarkdown>
                     </div>
                   </div>
                 );
@@ -252,54 +272,30 @@ export default function Home() {
               <div ref={chatEndRef} />
             </div>
 
-            <div className="flex items-center border border-gray-300 rounded-xl shadow-sm p-2 mt-4 bg-white">
+            {/* Chat Input */}
+            <div className="mt-4 flex-shrink-0 flex items-center border border-gray-300 rounded-lg bg-white p-2 sm:p-3 shadow-sm">
               <input
                 type="text"
-                placeholder={loading ? "Processing your question..." : "Ask a question about your documents..."}
+                placeholder={loading ? "Processing..." : "Ask a question..."}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                onKeyDown={handleEnterPress}
+                onKeyDown={(e) => e.key === "Enter" && handleAskQuery()}
                 disabled={!allFilesReady || loading}
-                className="flex-grow px-3 py-2 rounded-lg focus:outline-none text-gray-700 disabled:opacity-50"
+                className="flex-grow px-3 py-2 text-sm sm:text-base focus:outline-none disabled:opacity-50 text-black placeholder-gray-500"
               />
               <button
                 onClick={handleAskQuery}
                 disabled={loading || !allFilesReady}
-                className={`ml-2 px-4 py-2 rounded-lg ${
-                  loading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
-                } text-white font-medium transition`}
+                className={`ml-2 px-4 py-2 text-sm sm:text-base rounded-md ${
+                  loading ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"
+                } text-white transition font-medium`}
               >
-                {loading ? "Thinking..." : "Ask"}
+                {loading ? "Thinking..." : "Send"}
               </button>
             </div>
           </div>
-        )}
-      </section>
-
-<footer className="absolute bottom-0 left-0 w-full border-t border-gray-200 bg-white py-3 text-center text-sm text-gray-500 backdrop-blur-md bg-opacity-90">
-
-        © {new Date().getFullYear()} DocQuery — Intelligent Document Analysis
-      </footer>
-    </main>
-  );
-}
-
-function Step({
-  number,
-  title,
-  desc,
-}: {
-  number: string;
-  title: string;
-  desc: string;
-}) {
-  return (
-    <div className="flex flex-col items-center text-center">
-      <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 mb-3 font-semibold text-blue-700 shadow-sm">
-        {number}
+        </section>
       </div>
-      <h4 className="font-semibold text-gray-800 mb-1">{title}</h4>
-      <p className="text-xs text-gray-500">{desc}</p>
-    </div>
+    </main>
   );
 }
