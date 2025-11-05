@@ -1,0 +1,122 @@
+--- Document: PL.docx ---
+Mini-Projet de Recherche Op´erationnelle
+Realise par :Bilal BOUALAM et Ammar RAIB 2`eme ann´ee Cycle d’Ing´enieur 2025/2026
+
+Probl`eme 1 : Nutritionniste
+Un nutritionniste d´esire extraire trois ´el´ements nutritifs (R, S et T) a` partir de deux types d’aliments (A et B). Chaque unit´e de l’aliment A contient 1g de R, 1g de S et 2g de T. Chaque unit´e de l’aliment B contient 3g de R, 1g de S et 1g de T. Les couˆts sont respectivement de 3$ et 5$ par unit´e.
+On souhaite obtenir au moins 9g de R, 5g de S et 6g de T `a un couˆt minimal.
+
+Mod´elisation
+Variables de d´ecision :
+xA = nombre d’unit´es de l’aliment A,	xB = nombre d’unit´es de l’aliment B
+Fonction objectif :
+
+
+Sous contraintes :
+min Z = 3xA + 5xB
+xA + 3xB ≥ 9	(E´l´ement R)
+xA + xB ≥ 5	(E´l´ement S)
+2x  + x	≥ 6	(El´ement T)
+xA, xB ≥ 0
+
+
+R´esolution sous Excel
+Apr`es mod´elisation, le Solveur Excel a ´et´e utilis´e pour minimiser le couˆt. Les r´esultats optimaux obtenus sont : xA = 3, xB = 2, Zmin = 19.
+
+Figure 1 – R´esolution du probl`eme 1 dans Excel (tableau et r´esultats du Solveur).
+
+Probl`eme 2 : Production de grille-pains (GENCO)
+L’entreprise GENCO fabrique deux mod`eles : QL-500 et QL-700X. Chaque mod`ele n´ecessite un certain nombre d’heures de travail dans trois d´epartements.
+
+Donn´ees
+
+D´epartements	QL-500	QL-700X	Heures disponibles
+
+
+
+
+
+Le b´en´efice est de 66$ par unit´e du mod`ele QL-500 et de 84$ pour le QL-700X. On ne peut pas produire plus de 1100 unit´es du mod`ele QL-500.
+
+Mod´elisation
+Variables de d´ecision :
+x1 = nombre d’unit´es QL-500,	x2 = nombre d’unit´es QL-700X
+Fonction objectif :
+max Z = 66x1 + 84x2
+Sous contraintes :
+3	+ 4	≤ 4200	(Assemblage phase 1)
+2x1 + 2x2 ≤ 2600	 (V´erification/Empaquetage) 1100	(Limite du mod`ele QL-500)
+x1, x2 ≥ 0
+R´esolution sous Excel
+R´esultat optimal : x1 = 450, x2 = 750, Zmax = 91 800.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 2 – R´esolution du probl`eme 2 dans Excel (configuration du Solveur et r´esultat).
+
+Probl`eme 3 : Exploitation agricole
+Un agriculteur dispose de 35 acres pour cultiver du ma¨ıs et du bl´e. Les donn´ees sont les suivantes :
+		Ma¨ıs	Bl´e	Total disponible  Couˆt d’exploitation par acre (DH)		30		60	1800
+
+
+
+Mod´elisation
+Variables :
+Fonction objectif : Sous contraintes :
+
+
+
+
+
+
+x1 = acres de ma¨ıs,	x2 = acres de bl´e max Z = 200x1 + 300x2
+
+30x1 + 60x2 ≤ 1800	(Budget)
+4x1 + 3x2 ≤ 120	(Temps de travail)
+x1 + x2 ≤ 35	(Superficie totale)
+x1, x2 ≥ 0
+
+R´esolution sous Excel
+R´esultat optimal : x1 = 15, x2 = 20, Zmax = 9 000.
+
+Figure 3 – R´esolution du probl`eme 3 dans Excel (r´esultats et tableau).
+
+Probl`eme 4 : Mobilier & Co
+L’entreprise fabrique des bureaux et des chaises. Chaque bureau n´ecessite 4 unit´es de bois, chaque chaise 3 unit´es. Le b´en´efice par unit´e est respectivement de 40$ et 25$. L’entreprise dispose de 45 unit´es de bois et doit produire au moins deux fois plus de chaises que de bureaux.
+
+Mod´elisation
+Variables :
+xb = nombre de bureaux,	xc = nombre de chaises
+Fonction objectif :
+
+
+Sous contraintes :
+max Z = 40xb + 25xc
+
+4x + 3x ≤ 45	(Bois disponible)
+xc ≥ 2xb	(Marketing)
+xb, xc ≥ 0
+
+
+R´esolution sous Lindo
+R´esultat optimal : xb = 4.5, xc = 9, Zmax = 405.
+
+
+
+
+
+
+
+
+
+Figure 4 – R´esolution du probl`eme 4 sous LINDO.

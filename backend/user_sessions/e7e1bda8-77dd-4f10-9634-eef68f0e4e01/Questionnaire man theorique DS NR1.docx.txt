@@ -1,0 +1,214 @@
+--- Document: Questionnaire man theorique DS NR1.docx ---
+GUIDE DS NR1 DE MANOEUVRE
+
+  Définir les eaux resserrées ou chenaux ?
+Eaux resserrées : une zone de navigation où un bâtiment ne dispose pas en permanence de l'espace de manœuvre suffisant pour, compte tenu du vent et du courant, effectuer une giration complète sans danger.
+
+Qu’est ce qu’on entend par la NAVRES ?
+Le bâtiment navigue en eaux resserrées (NAVRES) lorsqu’il ne dispose pas en permanence de l’espace suffisant pour effectuer une giration complète sans franchir l’isobathe de sécurité (IDS).
+Quelles sont les paramètres du choix de la route en NAVRES ?
+Caractéristiques du bâtiment
+Densité des informations sur la carte
+Densité des dangers
+Présence de balisage
+Nature du trafic de surface
+L’influence du courant
+Les conditions météorologiques
+La mission
+Quelles sont les qualités attendues lors du choix du SNR ?
+Fiabilité ; 
+Précision ;
+Continuité
+En préparation des éléments de garde des limites horizontales, c’est quoi le danning de garde ?
+  C’est un repère parallèle dont le franchissement indique à l’OCDQ la sortie de l’espace de navigation.
+
+  Définir : D.M.P-  D.M.M – D.M.U ?
+DMP : C’est la distance minimale a laquelle le commandant accepte que son bâtiment passe par rapport a un autre bâtiment.
+DMU : C’est la distance à laquelle il devient urgent de manœuvrer pour éviter un abordage, pour un navire prioritaire est la distance a laquelle il a le droit et le devoir de manœuvrer si l’autre bâtiment n’a pas fait la manœuvre nécessaire pour éviter la collision.
+DMM : C’est la distance à laquelle la manœuvre doit commencer pour respecter la    DMP.
+Définir la D.A.U :
+D.A.U : est la distance d ’arrêt d ’urgence =distance parcourue depuis l’instant ou l’ordre AR toute est donnée jusqu’au moment où la vitesse devient nulle ; Elle varie en fonction de la vitesse et de la situation des machines
+Définir la profondeur de sécurité ?
+Profondeur de sécurité (PDS) : c’est la valeur lue sur le sondeur en deçà de laquelle l’OCDQ réagit en urgence pour retourner dans les eaux saines.
+Citez quelques règles d’anticollision :
+Toujours observer l'évolution du relèvement de l ’autre bâtiment
+Apprécier la route du bâtiment avant de manœuvrer 
+Apprécier la vitesse de rapprochement
+Manœuvrer pour que le bâtiment passe à la DMP
+Prévenir le commandant avant de franchir la DMP si elle ne peut être respectée
+
+Définir la profondeur de garde ?
+Profondeur de garde (PDG) : c’est la profondeur dont le franchissement indique à l’OCDQ la sortie de l’espace de navigation.
+Vous êtes l’OCDQ lors d’une NAVRES, quelles sont vos réactions et vos attributions pour une conduite efficace de la navigation ?
+Contrôle de la navigation avec ses propres éléments
+Organise et oriente les équipes
+Contrôle les équipes
+Organise et oriente la veille optique
+Vérifie la cohérence des différentes positions
+Contrôle l'exécution des ordres et de leurs effets
+Informe les équipes de renforts et le bord
+Contrôle la cadence des points
+
+ Citer et décrire par ordre de rapidité, les manœuvres pour récupérer un homme à la mer ?
+STOPPER ET BATTRE EN ARRIERE : 
+C’est théoriquement la manœuvre la plus rapide, mais elle ne peut être réalisée :
+Sur les bâtiments à turbines dont le renversement de marche n’est pas assez rapide, ni sur les grands bâtiments à diesel.
+Par mauvais temps, les bâtiments étant alors peu manœuvrant en marche arrière.
+Dans certains cas (beau temps, bâtiment à deux hélices), il sera possible de revenir en culant droit sur l’homme. D’autre fois (vent frais, bâtiment à une hélice) le bâtiment abattra irrésistiblement en marche arrière et devra alors culer suffisamment pour pouvoir revenir prendre l’homme en marche avant.
+FAIRE LE TOUR :
+Cette manœuvre est rapide, sure et peut être exécutée si on est certain de ne pas perdre la bouée de vue pendant la giration. Elle demande toutefois une certaine connaissance de qualité de bâtiment ainsi que du sens marin et du coup d’œil. La giration à effectuer est en général comprise entre 250° et 300° et demande de quatre à sept minutes. Pendant ce temps, la machine est mise (aux postes de manœuvre) et les dispositions pour repêcher l’homme sont prises.
+DEUX EVOLUTIONS DE 180° : 
+Cette manœuvre est une variante de la manœuvre précédente. Elle est adoptée lorsqu’on risque de perdre l’homme de vue pendant l’évolution. La barre est mise d’un bord, d’un angle légèrement inférieur à 180° est ainsi effectuée. Le navire est remis en route droite pendant un temps légèrement supérieur au temps mort qui s’est écoulé entre la chute de l’homme et le début de l’évolution (30 à 50s), puis une deuxième évolution de180° est entreprise avec le même angle de barre, évolution qui doit en principe aboutir prés de l’homme. Cette manœuvre est un peu plus longue que la précédente. Aussi dans le cas après avoir évolué de 180° l’homme est en vue, il faut revenir directement vers lui.
+LE BOUTAKOV : 
+C’est la manœuvre classique pour repasser sensiblement dans les mêmes eaux au cap inverse. Mais c’est la manœuvre la moins rapide, aussi elle ne doit être adopté que si elle présente seule de bonnes chances de permettre le repérage de l’homme : de nuit, par mauvaise visibilité (brume) ou si la passerelle a été prévenu tardivement. La manœuvre consiste à venir d’un bord de 70° environ avec un certain angle de barre (généralement 25°) puis à venir de 250° de l’autre bord avec le même angle de barre. L e bâtiment se trouve ainsi au cap inverse et sur la même route que précédemment. Reste à parcourir une certaine distance en ligne droite avant d’arrière sur l’homme. On ne doit pas surestimer la précision de cette manœuvre qui devra souvent être ajustée en fonction des qualités manœuvrières du navire, de l’état du vent et de la mer.
+Dans quels cas on utilise le Boutakov ?
+La manœuvre Boutacov est utilisée, généralement de nuit, par mauvaise visibilité (brume) ou si la passerelle a été prévenu tardivement.
+Quelles sont les dispositions à prendre lors de la mise à l’eau du Zodiac ?
+Liaison VHF 
+Éclairage de nuit
+Brasser à l ’extérieur dès que pare
+Mise a l ’eau s/o dès que vitesse < 6 nds
+Le zodiac pousse dès que pare
+Ceinture de hissage
+Donner les réactions immédiates internes en cas d’un homme à la mer ?
+Marquer l'homme (si la chute a pu être observée)
+Bouée couronne ou syresthomme
+Le pointer sur l’ordinateur, le "GPS" et la table traçante
+Les veilleurs suivent l’homme à la vue (au jumelles et le bras tendu vers l ’homme). De plus, ils effectuent une écoute attentive. Plusieurs hommes ont été retrouvés grâce à leurs appels.
+Informer
+Par diffusion générale ou sonnerie spéciale (préciser si exercice)
+Rappeler les équipes d'embarcation par diffusion REGLEMENTAIRE.
+Manœuvrer
+Mettre la machine au poste de manœuvre
+Mettre les 2 MB en fonction
+Exécuter la manœuvre.
+Donner les réactions immédiates externes en cas d’un homme à la mer ?
+Prévenir les bâtiments voisins par :
+Six coups de sifflet (même en l ’absence de bâtiment ces six coups de sifflet permettent à l ’homme tombé à la mer de savoir qu ’il a été vu).
+Hisser le pavillon oscar
+La nuit allumer les 02 feux rouges clignotants
+Utiliser les liaisons radio "FLASH FLASH FLASH, FLAG OSCAR"
+ C’est quoi la manœuvre la plus rapide (théoriquement) pour repêcher un homme a la mer ?
+Stopper en battre en arrière :
+Est la manœuvre théoriquement la plus rapide. Pas toujours réalisable dans la pratique. Cette manœuvre est à envisager par beau temps si le bâtiment s ’y prête. Par mauvais temps nous aurons des difficultés pour battre en arrière.
+ Quelles sont les ennemies d’un naufragé ?
+Le froid
+La chaleur
+La faim et la soif
+Le moral
+ Quelle est la conduite à tenir pour un homme à la mer isolé ?
+Conserver son sang froid
+Rechercher un objet flottant
+Jeter les objets lourds.
+ Quelles sont les dispositions à prendre par le personnel de quart à la passerelle ?
+Le barreur lance
+Le 2ème moteur de barre
+Permute les télécommandes
+
+ Quelles sont les dispositions à prendre en cas d’avarie de barre ?
+Dispositions à prendre en cas d’avarie de barre.
+Lancer le 2éme moto pompe
+Vérifier au compas qu’il ne s’agit pas d’une avarie de répétiteur d’angle
+Diffuser avarie de barre.
+Prévenir le Cdt.
+Mettre la machine au poste de manœuvre.
+Faire hisser :  Le pavillon 5 ou (passer le signale flag five)
+                             Les deux boules noires (allumer les feux rouges).
+Armer une liaison téléphonique (passerelle – local barre)
+Passer sur commande électrique locale
+Ordonner passer sur commande manuelle
+Passer sur commande à palans.
+Dans chacune de ces positions balancer la barre (10° de chaque bord) et si elle répond faire gouverner dans cette position jusqu’a réparation de l’avarie 
+Repasser alors en commande électrique passerelle et balancer la barre toute de chaque bord avant de reprendre le cap.
+
+ Quelles sont les avaries qui peuvent se produire au niveau des moteurs de barre ?
+  Les avaries des moteurs de barre sont soit :
+Avarie du moteur électrique
+Avarie du générateur hydraulique
+
+ Définir l’avance en giration :
+Avance en giration : la distance parcourue dans la direction de la route initiale depuis l’instant ou l ’angle de barre est ordonné jusqu’au moment ou le bâtiment est à la nouvelle route.
+ Citez les mesures à prendre en cas de brume
+Les mesures à prendre en cas de brume :
+Prévenir le commandant et le CO.
+Effectuer les signaux sonores réglementaires.
+Mettre la machine aux postes de manœuvre (ou au pré à manœuvrer).
+Armer le local barre (passer sur deux moteurs de barre).
+Prendre la SE3 sans dérogations.
+Allumer les feux de navigation.
+Réduire la vitesse (13 nœuds max).
+Assurer une veille acoustique et auditive renforcée.
+Si les feux de route sont éteints se déranger pour tout bâtiment feux clairs.
+Pendant la navigation en groupe se conformer aux règles de l’O.T.C. (feux, signaux sonores).
+
+  Citez les mesures à prendre pour protéger la coque durant un mauvais temps à quai
+    Les Dispositions à prendre pour protéger la coque durant un mauvais temps à quai : 
+Doubler les défenses,
+Renforcement de l’amarrage - Le bâtiment si possible doit alors appareiller pour encaisser  
+Les coups de vent en mer - Faire l’amarrage à quatre entre deux quais.
+
+
+Quelle est la raison de la mise en œuvre des deux moteurs de barre ?
+    La mise en fonction simultanée des 2 moteurs permet d ’obtenir un fonctionnement plus franc de l ’appareil à gouverner et un temps de mise à l ’angle du safran plus rapide et donc d ’obtenir pleinement les capacités manœuvrières du bâtiment dans des conditions particulières.
+ Quelles sont les avaries conduisant à une avarie de barre ?
+     Les avaries possibles sont :
+- avarie de télécommande
+- avarie du moteur électrique
+- avarie du générateur hydraulique
+- avarie du vérin hydraulique
+- fuite hydraulique.
+ A la fin de l’exercice quelles sont les dispositions à prendre pour la reprise de la situation normale ?
+Revenir en commande passerelle
+Balancement de la barre a droite et a gauche
+Faire rompre du PDM dans la machine et le local barre
+
+ Quelles sont les mesures à prendre en cas d’un atterrissage, d’un chenalage par mauvaise visibilité ?
+Par mauvaise visibilité :
+Atterrissage :
+- Démarrer le sondeur en temps utile
+- Etre paré à mouiller
+- Prendre une liaison avec les sémaphores pour connaître un lieu d’atterrissage favorable.
+Chenalage :
+- Disposer au C.O d’une table traçante 
+- Rappeler un officier de quart (opérations)
+- Passer si nécessaire en direction C.O et passerelle
+- Identification d’amers, embarcations aperçus ou entendus
+ Citez les mesures à prendre pour protéger la coque durant un mauvais temps à quai :
+  Les Dispositions à prendre pour protéger la coque durant un mauvais temps à quai : 
+Doubler les défenses,
+Renforcement de l’amarrage 
+Le bâtiment si possible doit alors appareiller pour encaisser les coups de vent en mer 
+Faire l’amarrage à quatre entre deux quais
+Suivre l'évolution météorologique.
+ Dispositions à prendre en vue du mauvais temps 
+Vérifier et renforcer tous les amarrages et les saisines, en particulier ceux des embarcations, lignes de mouillage, coupées, matériel extérieur. 
+Reprendre le mou des apparaux de manœuvres dormantes. 
+Disposer des filières garde-corps sur le pont pour y rendre moins dangereuse la circulation. 
+Interdire au personnel l'accès à toutes ou à certaines parties du pont pouvant être balayées par les lames. 
+Condamner certaines portes de communication entre le pont et les échelles de descente. 
+Vérifier la fermeture des hublots ou tapes. 
+
+ Quelles sont les différents types d’allures à considérer par mauvais temps
+  Par mauvais temps, le tangage et le roulis fatiguent la coque, lorsqu'ils donnent lieu à des rappels trop brutaux. À cet effet, il faut considérer plusieurs types d’allures :
+Allure par mer debout 
+Allure mer de l'arrière 
+Allure au plus près (entre 3 et 5 quarts du vent) 
+Allure au grand largue 
+Allure par mer de travers 
+Allure de la cape.
+ Pourquoi choisir l’allure de la mer de l’avant 
+  Cette allure peut être choisie si la longueur et la période de la houle sont bien accordées à la longueur et la vitesse du bâtiment ; le seul avantage est de s’affranchir du roulis.
+
+ En cas d’impossibilité de tenir la mer par l’avant vous êtes appelés à prendre la cape, définissez la cape et ses avantages pour la continuité de navigation ? Quand un navire doit prendre la cape
+Un bâtiment prend la cape lorsqu’il ne peut plus suivre la route prévue sans compromettre sa sécurité. Permet de pouvoir gouverner et de façon à être protégé le plus possible des chocs violents provoqués par les paquets de mer et les coups de roulis importants. 
+Limiter la fatigue du bâtiment et du personnel.
+
+ Définir les cyclones tropicaux
+Les cyclones tropicaux, appelés dans certains régions « typhon », sont des perturbations violentes se présentant sous forme de dépressions fermées, d’étendue limitée, qui prennent naissance entre les latitudes 5° et 20° nord ou sud. Ils sont caractérisés par une très basse pression atmosphérique, de fortes perturbations, une mer démontée au centre et des vents très violents sur le pourtour. Leur trajectoire présente grossièrement l’aspect d’une parabole toujours ouverte face à l’Est.
+ Règles de l’hémisphère Nord :
+Si le navire est dans le demi-cercle dangereux (le vent vire), faire route en prenant le vent à trois quarts tribords.
+Si le navire est sur la trajectoire ou dans le demi-cercle maniable (le vent recule) prendre le vent par tribord arrière.
+ Règles de l’hémisphère Sud :
+Si le navire est dans le demi-cercle dangereux (le vent recule) faire route en prenant le vent à trois quarts bâbords.
+Si le navire est dans le demi-cercle maniable (le vent vire), prendre le vent par bâbord arrière.
+
