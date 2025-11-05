@@ -18,25 +18,12 @@ export default function Sidebar({ files = [], onQuickAction, onClearContext }: S
     <aside className="h-full w-64 bg-white border-r border-gray-200 shadow-sm flex flex-col p-5 overflow-y-auto">
       {/* Brand / Header */}
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-          <Sparkles className="w-5 h-5 text-blue-600" />
-          DocQuery Assistant
-        </h2>
+
         <p className="text-xs text-gray-500 mt-1 leading-snug">
           Your intelligent assistant for reading, summarizing, and analyzing documents.
         </p>
       </div>
 
-      {/* What you can do */}
-      <div className="mb-6">
-        <h3 className="text-sm font-semibold text-gray-800 mb-2">🧠 What you can do</h3>
-        <ul className="space-y-1 text-sm text-gray-700">
-          <li>• Ask questions about your documents</li>
-          <li>• Generate summaries or key points</li>
-          <li>• Extract equations or tables</li>
-          <li>• Create comprehension questions</li>
-        </ul>
-      </div>
 
       {/* Quick Actions */}
       <div className="mb-6">
