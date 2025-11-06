@@ -43,7 +43,7 @@ export default function RootLayout({
         </Script>
         <Script type='text/javascript' src='//pl27995345.effectivegatecpm.com/90/1c/51/901c51efbba254c878761befbde57eeb.js'/>
         <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5287348434752015"
-     />
+      />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 text-gray-800`}
