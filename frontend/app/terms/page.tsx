@@ -190,8 +190,8 @@ export default function TermsOfService() {
             Terms, please contact our team at:
           </p>
           <p className="font-medium text-gray-700 mt-3">
-            📧 support@docquery.ai  
-            <br />🌍 www.docquery.ai  
+            📧 support@docquery.online 
+            <br />🌍 www.docquery.online
           </p>
         </section>
 
