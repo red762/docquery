@@ -44,6 +44,11 @@ function fixMathSyntax(str: string) {
     .replaceAll("\\]", "$$");
 }
 
+export const metadata = {
+  title: "DocQuery",
+  description: "AI-powered academic document search & summarizer. Instantly find answers from your PDFs and research papers.",
+};
+
 export default function Page() {
   const [files, setFiles] = useState<UploadedFile[]>([]);
   const [error, setError] = useState<string | null>(null);
