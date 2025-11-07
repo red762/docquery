@@ -131,7 +131,11 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
 
-        {/* SmartlinkAuto if you use it for smart linking */}
+
+            {/* 🟢 EffectiveGate 468x60 Banner Ad */}
+
+
+        {/* SmartlinkAuto */}
         <SmartlinkAuto />
 
         {children}
