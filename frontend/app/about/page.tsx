@@ -6,7 +6,7 @@ import Link from "next/link";
 export const metadata = {
   title: "About – DocQuery",
   description:
-    "Learn more about DocQuery, your intelligent assistant for document analysis and AI-powered insights.",
+    "free AI-powered academic document search & summarizer. Instantly find answers from your PDFs and research papers",
 };
 export default function AboutPage() {
   return (
