@@ -1,3 +1,4 @@
+// app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -15,8 +16,67 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DocQuery",
-  description: "Get answers to your questions from uploaded documents — fast and free",
+  title: {
+    default: "DocQuery Online",
+    template: "%s | DocQuery Online",
+  },
+  description:
+    "DocQuery Online is an AI-powered platform that lets students and researchers instantly analyze, summarize, and extract answers from academic PDFs, papers, and notes.",
+  keywords: [
+    "DocQuery Online",
+    "docquery",
+    "academic research AI",
+    "AI document search",
+    "AI PDF analyzer",
+    "PDF summarizer",
+    "research paper search engine",
+    "academic AI assistant",
+    "student research tools",
+    "university study helper",
+    "AI for education",
+    "AI document question answering",
+    "smart academic search",
+    "AI paper summarization",
+    "AI-powered learning",
+    "academic productivity tools",
+    "AI academic search engine",
+    "docquery academic AI",
+    "research automation tool",
+    "academic PDF search and summarize",
+  ],
+  authors: [{ name: "DocQuery", url: "https://docquery.online" }],
+  openGraph: {
+    title: "DocQuery Online",
+    description:
+      "AI-powered academic document search & summarizer. Instantly find answers from your PDFs and research papers.",
+    url: "https://docquery.online",
+    siteName: "DocQuery Online",
+    images: [
+      {
+        url: "https://docquery.online/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "DocQuery Online – AI academic document tool",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DocQuery Online",
+    description:
+      "Search, analyze and summarize academic documents using AI — fast and free.",
+    creator: "@docqueryapp", // optional
+  },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+  metadataBase: new URL("https://docquery.online"),
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -27,27 +87,52 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* ✅ Google Analytics */}
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href="https://docquery.online" />
+      </head>
+
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 text-gray-800`}
+      >
+        {/* Google Analytics */}
         <Script
-          async
+          strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=G-W94Q4T3H8D"
         />
-        <Script id="google-analytics">
+        <Script id="ga-config" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-W94Q4T3H8D');
+            gtag('config', 'G-W94Q4T3H8D', { page_path: window.location.pathname });
           `}
-          
         </Script>
-        <Script type='text/javascript' src='//pl27995345.effectivegatecpm.com/90/1c/51/901c51efbba254c878761befbde57eeb.js'/>
-        <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5287348434752015"
-      />
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 text-gray-800`}
-      >
+
+        {/* Structured Data */}
+        <Script id="ld-json" type="application/ld+json" strategy="afterInteractive">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "DocQuery Online",
+            url: "https://docquery.online",
+            potentialAction: {
+              "@type": "SearchAction",
+              target: "https://docquery.online/search?q={search_term_string}",
+              "query-input": "required name=search_term_string",
+            },
+          })}
+        </Script>
+
+        {/* Google AdSense */}
+        <Script
+          strategy="afterInteractive"
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5287348434752015"
+          crossOrigin="anonymous"
+        />
+
+        {/* SmartlinkAuto if you use it for smart linking */}
+        <SmartlinkAuto />
 
         {children}
       </body>
