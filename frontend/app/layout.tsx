@@ -3,8 +3,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
-import SmartlinkAuto from "./components/SmartlinkAuto";
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -123,20 +121,7 @@ export default function RootLayout({
           })}
         </Script>
 
-        {/* Google AdSense */}
-        <Script
-          strategy="afterInteractive"
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5287348434752015"
-          crossOrigin="anonymous"
-        />
-
-
-            {/* 🟢 EffectiveGate 468x60 Banner Ad */}
-
-
-        {/* SmartlinkAuto */}
-        <SmartlinkAuto />
+     
 
         {children}
       </body>
