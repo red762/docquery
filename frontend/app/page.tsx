@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Navbar from "./components/navbar";
 import Sidebar from "./components/sidebar";
 import Landing from "./components/Landing";
-import SmartlinkAuto from "./components/SmartlinkAuto";
+
 
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -197,7 +197,7 @@ export default function Page() {
 
   return (
     <main className="flex flex-col h-screen bg-gray-50 text-gray-900 overflow-hidden">
-      <SmartlinkAuto />
+      
       <Navbar
         files={files}
         isProcessing={isProcessing}
