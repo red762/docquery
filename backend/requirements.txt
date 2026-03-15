@@ -9,3 +9,4 @@ python-pptx
 numpy
 python-multipart
 requests
+dotenv
