@@ -20,7 +20,7 @@ interface UploadedFile {
 }
 
 const ALLOWED_EXTENSIONS = ["txt", "docx", "xlsx", "pptx", "pdf"];
-const BACKEND_URL = "http://127.0.0.1:9001";
+const BACKEND_URL = "https://docquery-production-2939.up.railway.app";
 
 // ✅ Utility: convert (\frac) / [\frac] to $...$ / $$...$$ for KaTeX
 function formatMath(answer: string) {
