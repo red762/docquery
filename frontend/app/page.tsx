@@ -20,7 +20,7 @@ interface UploadedFile {
 }
 
 const ALLOWED_EXTENSIONS = ["txt", "docx", "xlsx", "pptx", "pdf"];
-const BACKEND_URL = "https://docquery-oixr.onrender.com";
+const BACKEND_URL = "http://127.0.0.1:9001";
 
 // ✅ Utility: convert (\frac) / [\frac] to $...$ / $$...$$ for KaTeX
 function formatMath(answer: string) {
