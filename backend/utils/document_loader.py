@@ -3,7 +3,7 @@ from docx import Document
 from pptx import Presentation
 import openpyxl
 
-OCR_API_URL = "https://ocr-1-l9fl.onrender.com/ocr"
+OCR_API_URL = "https://ocr-api-production-c1d0.up.railway.app/ocr"
 
 def extract_text_from_file(path: str, filename: str) -> str:
     ext = filename.split(".")[-1].lower()
